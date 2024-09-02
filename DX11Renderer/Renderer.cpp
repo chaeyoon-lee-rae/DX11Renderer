@@ -16,7 +16,7 @@ bool Renderer::Initialize() {
     D3DUtils::CreateTexture("free_texture1.jpg", m_texture, m_textureResourceView, m_device);
     D3DUtils::CreateSamplerState(m_samplerState, m_device);
 
-    const int numSplit = 3;
+    const int numSplit = 5;
     m_numSplit = numSplit;
 
     vector<MeshInfo> v_mesh;
@@ -193,6 +193,7 @@ void Renderer::Update() {
         D3DUtils::UpdateBuffer(*pcb, mesh->m_pixelConstantBuffer, m_context);
 
         if (m_drawNormals && m_drawNormalsDirtyFlag) {
+            normalVcb->scale = m_normalScale;
             D3DUtils::UpdateBuffer(*normalVcb, normal->m_vertexConstantBuffer, m_context);
             m_drawNormalsDirtyFlag = false;
         }
@@ -264,44 +265,57 @@ void Renderer::Render() {
 }
 
 void Renderer::UpdateGUI() {
-    if (ImGui::Checkbox("Use Texture", &m_useTexture)) {
-        m_useTextureDirtyFlag = true;
-    }
-    ImGui::Checkbox("Wireframe", &m_drawAsWire);
-    ImGui::Checkbox("Draw Normals", &m_drawNormals);
-    if (ImGui::SliderFloat("Normal scale", &m_normalScale, 0.0f, 1.0f)) {
-        m_drawNormalsDirtyFlag = true;
-    }
-    ImGui::SliderFloat3("m_modelTranslation", &m_modelTranslation.x, -2.0f, 2.0f);
-    ImGui::SliderFloat3("m_modelRotation", &m_modelRotation.x, -3.14f, 3.14f);
-    ImGui::SliderFloat3("m_modelScaling", &m_modelScaling.x, 0.1f, 2.0f);
-    ImGui::SliderFloat("m_viewRot", &m_viewRot, -3.14f, 3.14f);
+    ImGui::Text("Average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate,
+                ImGui::GetIO().Framerate);
 
-    if (ImGui::SliderFloat("Material Shininess", &m_shininess, 1.0f, 256.0f)) {
-        m_shininessDirtyFlag = true;
-    }
+    ImGuiIO &io = ImGui::GetIO();
+    if (ImGui::IsMousePosValid())
+        ImGui::Text("Mouse pos: (%g, %g)", io.MousePos.x, io.MousePos.y);
+    else
+        ImGui::Text("Mouse pos: <INVALID>");
+    ImGui::Text("Mouse delta: (%g, %g)", io.MouseDelta.x, io.MouseDelta.y);
 
-    if (ImGui::RadioButton("Directional Light", m_lightType == 0)) {
-        m_lightType = 0;
-    }
-    ImGui::SameLine();
-    if (ImGui::RadioButton("Point Light", m_lightType == 1)) {
-        m_lightType = 1;
-    }
-    ImGui::SameLine();
-    if (ImGui::RadioButton("Spot Light", m_lightType == 2)) {
-        m_lightType = 2;
+    if (ImGui::CollapsingHeader("Render Options", ImGuiTreeNodeFlags_DefaultOpen)) {
+        if (ImGui::Checkbox("Use Texture", &m_useTexture)) {
+            m_useTextureDirtyFlag = true;
+        }
+        ImGui::Checkbox("Wireframe", &m_drawAsWire);
+        ImGui::Checkbox("Draw Normals", &m_drawNormals);
+        if (ImGui::SliderFloat("Normal scale", &m_normalScale, 0.0f, 1.0f)) {
+            m_drawNormalsDirtyFlag = true;
+        }
     }
 
-    ImGui::SliderFloat("Material Diffuse", &m_materialDiffuse, 0.0f, 1.0f);
-    ImGui::SliderFloat("Material Specular", &m_materialSpecular, 0.0f, 1.0f);
+    if (ImGui::CollapsingHeader("Transformations", ImGuiTreeNodeFlags_DefaultOpen)) {
+        ImGui::SliderFloat3("m_modelTranslation", &m_modelTranslation.x, -2.0f, 2.0f);
+        ImGui::SliderFloat3("m_modelRotation", &m_modelRotation.x, -3.14f, 3.14f);
+        ImGui::SliderFloat3("m_modelScaling", &m_modelScaling.x, 0.1f, 2.0f);    
+        ImGui::SliderFloat("m_viewRot", &m_viewRot, -3.14f, 3.14f);
+    }
 
-    ImGui::SliderFloat3("Light Position", &m_lightFromGUI.position.x, -5.0f, 5.0f);
+    if (ImGui::CollapsingHeader("Shading Options", ImGuiTreeNodeFlags_DefaultOpen)) {
+        ImGui::SliderFloat("Material Diffuse", &m_materialDiffuse, 0.0f, 1.0f);
+        ImGui::SliderFloat("Material Specular", &m_materialSpecular, 0.0f, 1.0f);
+        if (ImGui::SliderFloat("Material Shininess", &m_shininess, 1.0f, 256.0f)) {
+            m_shininessDirtyFlag = true;
+        }
 
-    ImGui::SliderFloat("Light fallOffStart", &m_lightFromGUI.fallOffStart, 0.0f, 5.0f);
+        if (ImGui::RadioButton("Directional Light", m_lightType == 0)) {
+            m_lightType = 0;
+        }
+        ImGui::SameLine();
+        if (ImGui::RadioButton("Point Light", m_lightType == 1)) {
+            m_lightType = 1;
+        }
+        ImGui::SameLine();
+        if (ImGui::RadioButton("Spot Light", m_lightType == 2)) {
+            m_lightType = 2;
+        }
 
-    ImGui::SliderFloat("Light fallOffEnd", &m_lightFromGUI.fallOffEnd, 0.0f, 10.0f);
-
-    ImGui::SliderFloat("Light spotPower", &m_lightFromGUI.spotPower, 1.0f, 512.0f);
+        ImGui::SliderFloat3("Light Position", &m_lightFromGUI.position.x, -5.0f, 5.0f);
+        ImGui::SliderFloat("Light fallOffStart", &m_lightFromGUI.fallOffStart, 0.0f, 5.0f);
+        ImGui::SliderFloat("Light fallOffEnd", &m_lightFromGUI.fallOffEnd, 0.0f, 10.0f);
+        ImGui::SliderFloat("Light spotPower", &m_lightFromGUI.spotPower, 1.0f, 512.0f);
+    }
 }
 

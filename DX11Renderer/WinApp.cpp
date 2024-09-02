@@ -45,22 +45,18 @@ int WinApp::Run() {
 
             ImGui::NewFrame();
             ImGui::Begin("Scene Control");
-
-            ImGui::Text("Average %.3f ms/frame (%.1f FPS)",
-                        1000.0f / ImGui::GetIO().Framerate,
-                        ImGui::GetIO().Framerate);
-
-            UpdateGUI();
-
-            ImGui::SetWindowPos(ImVec2(0.0f, 0.0f));
+            this->UpdateGUI();
 
             m_guiWidth = int(ImGui::GetWindowWidth());
 
+            ImGui::SetWindowPos(ImVec2(float(m_screenWidth - m_guiWidth), 0.0f));
+            ImGui::SetWindowSize(ImVec2(float(m_guiWidth), float(m_screenHeight)));
+
             ImGui::End();
             ImGui::Render();
-            Update();
 
-            Render();
+            this->Update();
+            this->Render();
 
             ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
             m_swapChain->Present(1, 0);

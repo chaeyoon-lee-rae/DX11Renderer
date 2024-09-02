@@ -107,7 +107,7 @@ bool D3DUtils::SetViewPort(const int guiWidth, const int width, const int height
 
     if (previousGuiWidth != guiWidth) {
         ZeroMemory(&viewPort, sizeof(D3D11_VIEWPORT));
-        viewPort.TopLeftX = float(guiWidth);
+        viewPort.TopLeftX = 0;
         viewPort.TopLeftY = 0;
         viewPort.Width = float(width - guiWidth);
         viewPort.Height = float(height);
