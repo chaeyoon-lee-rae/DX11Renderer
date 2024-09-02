@@ -39,8 +39,8 @@ struct vertexConstantBuffer {
 struct pixelConstantBuffer {
     Material material;  // 48
     Light lights[3];    // 48
-    Vector3 camera;   // 12
-    float useTexture;    // 4
+    Vector3 camera;     // 12
+    float useTexture;   // 4
 };
 
 // Normal
