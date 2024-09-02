@@ -7,13 +7,13 @@
 using namespace std;
 
 int main() {
-    Renderer exampleApp(1600, 1200);
+    Renderer renderer(1600, 1200);
 
-    if (!exampleApp.Initialize()) {
+    if (!renderer.Initialize()) {
         cout << "Initialization failed." << endl;
         return -1;
     }
 
-    return exampleApp.Run();
+    return renderer.Run();
 }
  
