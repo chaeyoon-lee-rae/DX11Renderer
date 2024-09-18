@@ -28,9 +28,9 @@ public:
     int Run();
 
     virtual bool Initialize();
-    virtual void UpdateGUI() = 0;
     virtual void Update() = 0;
     virtual void Render() = 0;
+    virtual void UpdateGUI() = 0;
 
     virtual LRESULT MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
@@ -45,7 +45,7 @@ protected:
     // Window Setting Variables
     int m_screenWidth;
     int m_screenHeight;
-    int m_guiWidth;
+    float m_guiWidth;
     HWND m_mainWindow;
     UINT m_numQualityLevels; // MSAA quality level
 
