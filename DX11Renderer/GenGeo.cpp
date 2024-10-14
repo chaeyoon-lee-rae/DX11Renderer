@@ -5,7 +5,7 @@ using DirectX::SimpleMath::Vector2;
 using DirectX::SimpleMath::Vector3;
 
 MeshInfo GenGeo::MakeBox(const float width, const float height, const int numSplit,
-                                    const int order) {
+                         const int order) {
     const float splitHeight = height / float(numSplit);
 
     vector<Vector3> pos;

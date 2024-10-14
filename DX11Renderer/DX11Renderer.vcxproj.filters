@@ -65,6 +65,12 @@
     <None Include="InputLayout.hlsli">
       <Filter>Shader Files</Filter>
     </None>
+    <None Include="..\.github\ISSUE_TEMPLATE\bug_report.md">
+      <Filter>Git Files</Filter>
+    </None>
+    <None Include="..\.github\ISSUE_TEMPLATE\feature_request.md">
+      <Filter>Git Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -78,6 +84,9 @@
     </Filter>
     <Filter Include="Shader Files">
       <UniqueIdentifier>{7a0c323b-93b2-46b5-aec4-ee3629544598}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Git Files">
+      <UniqueIdentifier>{e57b8d57-029c-45ef-8580-d45084390264}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -3,7 +3,6 @@
 #include <tuple>
 #include <vector>
 
-
 using namespace std;
 
 Renderer::Renderer(int screenWidth, int screenHeight) : WinApp(screenWidth, screenHeight) {}
@@ -13,7 +12,7 @@ bool Renderer::Initialize() {
     if (!WinApp::Initialize())
         return false;
 
-    D3DUtils::CreateTexture("free_texture1.jpg", m_texture, m_textureResourceView, m_device);
+    D3DUtils::CreateTexture("free_texture2.jpg", m_texture, m_textureResourceView, m_device);
     D3DUtils::CreateSamplerState(m_samplerState, m_device);
 
     const int numSplit = 5;
@@ -22,9 +21,8 @@ bool Renderer::Initialize() {
     vector<MeshInfo> v_mesh;
     v_mesh.resize(numSplit);
 
-    for (int i = 0; i < numSplit; ++i) {
+    for (int i = 0; i < numSplit; ++i)
         v_mesh[i] = GenGeo::MakeBox(m_boxWidth, m_boxHeight, numSplit, i);
-    }
 
     for (size_t i = 0; i < v_mesh.size(); ++i) {
         // MESH
@@ -137,9 +135,9 @@ void Renderer::Update() {
 
         auto trans = m_modelTranslation + startHeight - float(i) * Vector3(0.0f, offset, 0.0f);
 
-        vcb->model = Matrix::CreateScale(m_modelScaling) * 
-                     Matrix::CreateTranslation(trans) *
-                     Matrix::CreateRotationY(m_modelRotation.y + rotY) * 
+        vcb->model = Matrix::CreateScale(m_modelScaling) *
+                     Matrix::CreateRotationY(m_modelRotation.y + rotY) *
+                     Matrix::CreateTranslation(trans * m_modelScaling) *
                      Matrix::CreateRotationX(m_modelRotation.x) *
                      Matrix::CreateRotationZ(m_modelRotation.z);
         vcb->model = vcb->model.Transpose();

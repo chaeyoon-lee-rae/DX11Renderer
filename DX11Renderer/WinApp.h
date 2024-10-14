@@ -25,18 +25,19 @@ class WinApp {
 public:
     WinApp(int screenWidth, int screenHeight);
     virtual ~WinApp();
+    virtual bool Initialize();
+
+    float GetAspectRatio() const;
+
+    virtual LRESULT MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
     int Run();
 
-    virtual bool Initialize();
+protected:
     virtual void Update() = 0;
     virtual void Render() = 0;
     virtual void UpdateGUI() = 0;
 
-    virtual LRESULT MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
-
-    float GetAspectRatio() const;
-
-protected:
     bool InitMainWindow();
     bool InitDirect3D();
     bool InitGUI();

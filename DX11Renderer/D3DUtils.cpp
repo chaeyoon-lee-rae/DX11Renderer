@@ -4,7 +4,7 @@
 #include "stb_image.h"
 
 bool D3DUtils::CreateDevice(UINT &numQualityLevels, ComPtr<ID3D11Device> &device,
-                                   ComPtr<ID3D11DeviceContext> &context) {
+                            ComPtr<ID3D11DeviceContext> &context) {
     HRESULT hrRet;
 
     UINT createDeviceFlags = 0;
@@ -46,10 +46,10 @@ bool D3DUtils::CreateDevice(UINT &numQualityLevels, ComPtr<ID3D11Device> &device
 }
 
 bool D3DUtils::CreateDeviceAndSwapChain(const int width, const int height,
-                                               const UINT numQualityLevels, const HWND &window,
-                                               ComPtr<IDXGISwapChain> &swapChain,
-                                               ComPtr<ID3D11Device> &device,
-                                               ComPtr<ID3D11DeviceContext> &context) {
+                                        const UINT numQualityLevels, const HWND &window,
+                                        ComPtr<IDXGISwapChain> &swapChain,
+                                        ComPtr<ID3D11Device> &device,
+                                        ComPtr<ID3D11DeviceContext> &context) {
     DXGI_SWAP_CHAIN_DESC sd;
     ZeroMemory(&sd, sizeof(sd));
     sd.BufferDesc.Width = width;
@@ -87,8 +87,8 @@ bool D3DUtils::CreateDeviceAndSwapChain(const int width, const int height,
 }
 
 bool D3DUtils::CreateRenderTargetView(ComPtr<IDXGISwapChain> &swapChain,
-                                             ComPtr<ID3D11Device> &device,
-                                             ComPtr<ID3D11RenderTargetView> &renderTargetView) {
+                                      ComPtr<ID3D11Device> &device,
+                                      ComPtr<ID3D11RenderTargetView> &renderTargetView) {
     ComPtr<ID3D11Texture2D> backBuffer;
     swapChain->GetBuffer(0, IID_PPV_ARGS(backBuffer.GetAddressOf()));
     if (backBuffer)
@@ -102,7 +102,7 @@ bool D3DUtils::CreateRenderTargetView(ComPtr<IDXGISwapChain> &swapChain,
 }
 
 bool D3DUtils::SetViewPort(const int guiWidth, const int width, const int height,
-                                  D3D11_VIEWPORT &viewPort, ComPtr<ID3D11DeviceContext> &context) {
+                           D3D11_VIEWPORT &viewPort, ComPtr<ID3D11DeviceContext> &context) {
     static int previousGuiWidth = guiWidth;
 
     if (previousGuiWidth != guiWidth) {
@@ -123,8 +123,8 @@ bool D3DUtils::SetViewPort(const int guiWidth, const int width, const int height
 }
 
 bool D3DUtils::CreateRasterizerState(ComPtr<ID3D11RasterizerState> &solidRasterizerState,
-                                            ComPtr<ID3D11RasterizerState> &wireRasterizerState,
-                                            ComPtr<ID3D11Device> &device) {
+                                     ComPtr<ID3D11RasterizerState> &wireRasterizerState,
+                                     ComPtr<ID3D11Device> &device) {
     HRESULT hrRet;
 
     D3D11_RASTERIZER_DESC rastDesc;
@@ -146,10 +146,10 @@ bool D3DUtils::CreateRasterizerState(ComPtr<ID3D11RasterizerState> &solidRasteri
     return true;
 }
 
-bool D3DUtils::CreateDepthBuffer(const int width, const int height,
-                                        const UINT &numQualityLevels, ComPtr<ID3D11Device> &device,
-                                        ComPtr<ID3D11Texture2D> &depthStencilBuffer,
-                                        ComPtr<ID3D11DepthStencilView> &depthStencilView) {
+bool D3DUtils::CreateDepthBuffer(const int width, const int height, const UINT &numQualityLevels,
+                                 ComPtr<ID3D11Device> &device,
+                                 ComPtr<ID3D11Texture2D> &depthStencilBuffer,
+                                 ComPtr<ID3D11DepthStencilView> &depthStencilView) {
     HRESULT hrRet;
 
     D3D11_TEXTURE2D_DESC depthStencilBufferDesc;
@@ -182,7 +182,7 @@ bool D3DUtils::CreateDepthBuffer(const int width, const int height,
 }
 
 bool D3DUtils::CreateDepthStencilState(ComPtr<ID3D11DepthStencilState> depthStencilState,
-                                              ComPtr<ID3D11Device> device) {
+                                       ComPtr<ID3D11Device> device) {
     HRESULT hrRet;
 
     D3D11_DEPTH_STENCIL_DESC depthStencilDesc;
@@ -222,9 +222,8 @@ void D3DUtils::CreateVertexShader(const wstring &filename,
 }
 
 void D3DUtils::CreateInputLayout(const vector<D3D11_INPUT_ELEMENT_DESC> &inputElements,
-                                        ComPtr<ID3D11InputLayout> &inputLayout,
-                                        ComPtr<ID3DBlob> &shaderBlob,
-                                        ComPtr<ID3D11Device> &device) {
+                                 ComPtr<ID3D11InputLayout> &inputLayout,
+                                 ComPtr<ID3DBlob> &shaderBlob, ComPtr<ID3D11Device> &device) {
 
     HRESULT hr = device->CreateInputLayout(inputElements.data(), UINT(inputElements.size()),
                                            shaderBlob->GetBufferPointer(),
@@ -233,9 +232,8 @@ void D3DUtils::CreateInputLayout(const vector<D3D11_INPUT_ELEMENT_DESC> &inputEl
     CheckFailed(hr, "CreateInputLayout failed.");
 }
 
-void D3DUtils::CreatePixelShader(const wstring &filename,
-                                        ComPtr<ID3D11PixelShader> &pixelShader,
-                                        ComPtr<ID3D11Device> &device) {
+void D3DUtils::CreatePixelShader(const wstring &filename, ComPtr<ID3D11PixelShader> &pixelShader,
+                                 ComPtr<ID3D11Device> &device) {
     ComPtr<ID3DBlob> shaderBlob;
     ComPtr<ID3DBlob> errorBlob;
 
@@ -253,8 +251,8 @@ void D3DUtils::CreatePixelShader(const wstring &filename,
 }
 
 void D3DUtils::CreateTexture(const std::string &filename, ComPtr<ID3D11Texture2D> &texture,
-                                    ComPtr<ID3D11ShaderResourceView> &textureResourceView,
-                                    ComPtr<ID3D11Device> &device) {
+                             ComPtr<ID3D11ShaderResourceView> &textureResourceView,
+                             ComPtr<ID3D11Device> &device) {
 
     int width, height, channels;
 
@@ -287,7 +285,7 @@ void D3DUtils::CreateTexture(const std::string &filename, ComPtr<ID3D11Texture2D
 }
 
 void D3DUtils::CreateSamplerState(ComPtr<ID3D11SamplerState> &samplerState,
-                                         ComPtr<ID3D11Device> &device) {
+                                  ComPtr<ID3D11Device> &device) {
     D3D11_SAMPLER_DESC sampDesc;
     ZeroMemory(&sampDesc, sizeof(sampDesc));
     sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
@@ -302,8 +300,8 @@ void D3DUtils::CreateSamplerState(ComPtr<ID3D11SamplerState> &samplerState,
 }
 
 void D3DUtils::CreateVertexBuffer(const vector<Vertex> &vertices,
-                                         ComPtr<ID3D11Buffer> &vertexBuffer,
-                                         ComPtr<ID3D11Device> &device) {
+                                  ComPtr<ID3D11Buffer> &vertexBuffer,
+                                  ComPtr<ID3D11Device> &device) {
     D3D11_BUFFER_DESC bufferDesc = {};
     bufferDesc.Usage = D3D11_USAGE_IMMUTABLE;
     bufferDesc.ByteWidth = static_cast<UINT>(sizeof(Vertex) * vertices.size());
@@ -318,8 +316,8 @@ void D3DUtils::CreateVertexBuffer(const vector<Vertex> &vertices,
 }
 
 void D3DUtils::CreateIndexBuffer(const std::vector<uint16_t> &indices,
-                                        ComPtr<ID3D11Buffer> &m_indexBuffer,
-                                        ComPtr<ID3D11Device> &device) {
+                                 ComPtr<ID3D11Buffer> &m_indexBuffer,
+                                 ComPtr<ID3D11Device> &device) {
     D3D11_BUFFER_DESC bufferDesc = {};
     bufferDesc.Usage = D3D11_USAGE_IMMUTABLE;
     bufferDesc.ByteWidth = UINT(sizeof(uint16_t) * indices.size());

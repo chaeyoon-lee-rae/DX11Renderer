@@ -37,6 +37,8 @@ bool WinApp::Initialize() {
     return true;
 }
 
+float WinApp::GetAspectRatio() const { return float(m_screenWidth - m_guiWidth) / m_screenHeight; }
+
 // Forward declare message handler from imgui_impl_win32.cpp
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam,
                                                              LPARAM lParam);
@@ -44,6 +46,34 @@ extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg
 // 메세지 콜백 함수, 멤버 함수를 RegisterClassEx에 직접 등록할 수 없는 관계로 간접적으로 등록
 LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
     return g_appBase->MsgProc(hWnd, msg, wParam, lParam);
+}
+
+LRESULT WinApp::MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+    if (ImGui_ImplWin32_WndProcHandler(hwnd, msg, wParam, lParam))
+        return true;
+
+    switch (msg) {
+    case WM_SIZE:
+        if (m_swapChain) {
+            m_screenWidth = int(LOWORD(lParam));
+            m_screenHeight = int(HIWORD(lParam));
+            m_guiWidth = 0;
+
+            m_renderTargetView.Reset();
+            m_swapChain->ResizeBuffers(0, (UINT)LOWORD(lParam), (UINT)HIWORD(lParam),
+                                       DXGI_FORMAT_UNKNOWN, 0);
+            D3DUtils::CreateRenderTargetView(m_swapChain, m_device, m_renderTargetView);
+            D3DUtils::SetViewPort(m_guiWidth, m_screenWidth, m_screenHeight, m_viewport, m_context);
+            D3DUtils::CreateDepthBuffer(m_screenWidth, m_screenHeight, m_numQualityLevels, m_device,
+                                        m_depthStencilBuffer, m_depthStencilView);
+        }
+        break;
+    case WM_DESTROY:
+        ::PostQuitMessage(0);
+        return 0;
+    }
+
+    return ::DefWindowProc(hwnd, msg, wParam, lParam);
 }
 
 bool WinApp::InitMainWindow() {
@@ -122,8 +152,6 @@ bool WinApp::InitGUI() {
     return true;
 }
 
-float WinApp::GetAspectRatio() const { return float(m_screenWidth - m_guiWidth) / m_screenHeight; }
-
 int WinApp::Run() {
     MSG msg = {0};
     while (WM_QUIT != msg.message) {
@@ -156,30 +184,3 @@ int WinApp::Run() {
     return 0;
 }
 
-LRESULT WinApp::MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-    if (ImGui_ImplWin32_WndProcHandler(hwnd, msg, wParam, lParam))
-        return true;
-
-    switch (msg) {
-    case WM_SIZE:
-        if (m_swapChain) {
-            m_screenWidth = int(LOWORD(lParam));
-            m_screenHeight = int(HIWORD(lParam));
-            m_guiWidth = 0;
-
-            m_renderTargetView.Reset();
-            m_swapChain->ResizeBuffers(0, (UINT)LOWORD(lParam), (UINT)HIWORD(lParam),
-                                       DXGI_FORMAT_UNKNOWN, 0);
-            D3DUtils::CreateRenderTargetView(m_swapChain, m_device, m_renderTargetView);
-            D3DUtils::SetViewPort(m_guiWidth, m_screenWidth, m_screenHeight, m_viewport, m_context);
-            D3DUtils::CreateDepthBuffer(m_screenWidth, m_screenHeight, m_numQualityLevels, m_device,
-                                        m_depthStencilBuffer, m_depthStencilView);
-        }
-        break;
-    case WM_DESTROY:
-        ::PostQuitMessage(0);
-        return 0;
-    }
-
-    return ::DefWindowProc(hwnd, msg, wParam, lParam);
-}
