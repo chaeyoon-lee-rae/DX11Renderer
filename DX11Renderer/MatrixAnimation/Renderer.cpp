@@ -1,4 +1,5 @@
-﻿#include "Renderer.h"
+﻿#include "../shared/Renderer.h"
+#include "GenGeo.h"
 
 #include <tuple>
 #include <vector>
@@ -86,14 +87,14 @@ bool Renderer::Initialize() {
         {"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 4 * 3 + 4 * 3, D3D11_INPUT_PER_VERTEX_DATA, 0},
     };
 
-    D3DUtils::CreateVertexShader(L"MeshVertexShader.hlsl", inputElements, m_meshVertexShader,
+    D3DUtils::CreateVertexShader(L"../shared/MeshVertexShader.hlsl", inputElements, m_meshVertexShader,
                                  m_meshInputLayout, m_shaderBlob, m_device);
-    D3DUtils::CreateVertexShader(L"NormalVertexShader.hlsl", inputElements, m_normalVertexShader,
+    D3DUtils::CreateVertexShader(L"../shared/NormalVertexShader.hlsl", inputElements, m_normalVertexShader,
                                  m_meshInputLayout, m_shaderBlob, m_device);
     D3DUtils::CreateInputLayout(inputElements, m_meshInputLayout, m_shaderBlob, m_device);
 
-    D3DUtils::CreatePixelShader(L"MeshPixelShader.hlsl", m_meshPixelShader, m_device);
-    D3DUtils::CreatePixelShader(L"NormalPixelShader.hlsl", m_normalPixelShader, m_device);
+    D3DUtils::CreatePixelShader(L"../shared/MeshPixelShader.hlsl", m_meshPixelShader, m_device);
+    D3DUtils::CreatePixelShader(L"../shared/NormalPixelShader.hlsl", m_normalPixelShader, m_device);
 
 
     return true;
