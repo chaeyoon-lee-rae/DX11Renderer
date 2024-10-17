@@ -17,6 +17,9 @@
     <None Include="..\..\.gitignore">
       <Filter>Git Files</Filter>
     </None>
+    <None Include="..\..\.github\PULL_REQUEST_TEMPLATE\pull_request_template.md">
+      <Filter>Git Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
