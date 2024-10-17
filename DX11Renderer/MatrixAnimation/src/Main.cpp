@@ -2,7 +2,7 @@
 #include <memory>
 #include <windows.h>
 
-#include "../shared/Renderer.h"
+#include "../../shared/src/include/Renderer.h"
 
 using namespace std;
 

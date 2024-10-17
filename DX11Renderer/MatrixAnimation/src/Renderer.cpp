@@ -1,5 +1,5 @@
-﻿#include "../shared/Renderer.h"
-#include "GenGeo.h"
+﻿#include "../../shared/src/include/Renderer.h"
+#include "include/GenGeo.h"
 
 #include <tuple>
 #include <vector>
@@ -13,7 +13,7 @@ bool Renderer::Initialize() {
     if (!WinApp::Initialize())
         return false;
 
-    D3DUtils::CreateTexture("free_texture2.jpg", m_texture, m_textureResourceView, m_device);
+    D3DUtils::CreateTexture("assets/textures/free_texture1.jpg", m_texture, m_textureResourceView, m_device);
     D3DUtils::CreateSamplerState(m_samplerState, m_device);
 
     const int numSplit = 5;
@@ -87,14 +87,14 @@ bool Renderer::Initialize() {
         {"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 4 * 3 + 4 * 3, D3D11_INPUT_PER_VERTEX_DATA, 0},
     };
 
-    D3DUtils::CreateVertexShader(L"../shared/MeshVertexShader.hlsl", inputElements, m_meshVertexShader,
+    D3DUtils::CreateVertexShader(L"../shared/shaders/MeshVertexShader.hlsl", inputElements, m_meshVertexShader,
                                  m_meshInputLayout, m_shaderBlob, m_device);
-    D3DUtils::CreateVertexShader(L"../shared/NormalVertexShader.hlsl", inputElements, m_normalVertexShader,
+    D3DUtils::CreateVertexShader(L"../shared/shaders/NormalVertexShader.hlsl", inputElements, m_normalVertexShader,
                                  m_meshInputLayout, m_shaderBlob, m_device);
     D3DUtils::CreateInputLayout(inputElements, m_meshInputLayout, m_shaderBlob, m_device);
 
-    D3DUtils::CreatePixelShader(L"../shared/MeshPixelShader.hlsl", m_meshPixelShader, m_device);
-    D3DUtils::CreatePixelShader(L"../shared/NormalPixelShader.hlsl", m_normalPixelShader, m_device);
+    D3DUtils::CreatePixelShader(L"../shared/shaders/MeshPixelShader.hlsl", m_meshPixelShader, m_device);
+    D3DUtils::CreatePixelShader(L"../shared/shaders/NormalPixelShader.hlsl", m_normalPixelShader, m_device);
 
 
     return true;

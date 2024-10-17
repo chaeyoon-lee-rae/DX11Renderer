@@ -1,4 +1,4 @@
-#include "GenGeo.h"
+#include "include/GenGeo.h"
 
 using std::vector;
 using DirectX::SimpleMath::Vector2;

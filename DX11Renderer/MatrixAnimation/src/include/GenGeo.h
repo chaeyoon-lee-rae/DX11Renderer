@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "../shared/Vertex.h"
+#include "../../../shared/src/include/Vertex.h"
 
 struct MeshInfo {
     std::vector<Vertex> vertices;

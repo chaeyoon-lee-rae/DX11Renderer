@@ -1,61 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="GenGeo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\shared\D3DUtils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\shared\WinApp.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="GenGeo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\shared\Mesh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\shared\Renderer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\shared\Vertex.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\shared\WinApp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\shared\CheckHr.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\shared\D3DUtils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\shared\ConstantBuffers.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include=".clang-format" />
     <None Include="..\.github\ISSUE_TEMPLATE\bug_report.md">
       <Filter>Git Files</Filter>
     </None>
     <None Include="..\.github\ISSUE_TEMPLATE\feature_request.md">
       <Filter>Git Files</Filter>
     </None>
-    <None Include="..\shared\InputLayout.hlsli">
+    <None Include="..\shared\config\.clang-format" />
+    <None Include="..\shared\shaders\InputLayout.hlsli">
       <Filter>Shader Files</Filter>
     </None>
-    <None Include="..\shared\PhongConstants.hlsli">
+    <None Include="..\shared\shaders\PhongConstants.hlsli">
       <Filter>Shader Files</Filter>
+    </None>
+    <None Include="..\..\.gitignore">
+      <Filter>Git Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -76,24 +36,67 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="free_texture1.jpg">
+    <ClCompile Include="src\GenGeo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\src\D3DUtils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\shared\src\WinApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\include\GenGeo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shared\src\include\CheckHr.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shared\src\include\ConstantBuffers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shared\src\include\D3DUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shared\src\include\Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shared\src\include\Renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shared\src\include\Vertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\shared\src\include\WinApp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\textures\free_texture2.jpg">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="free_texture2.jpg">
+    <Image Include="assets\textures\free_texture1.jpg">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="..\shared\MeshPixelShader.hlsl">
+    <FxCompile Include="..\shared\shaders\MeshPixelShader.hlsl">
       <Filter>Shader Files</Filter>
     </FxCompile>
-    <FxCompile Include="..\shared\MeshVertexShader.hlsl">
+    <FxCompile Include="..\shared\shaders\MeshVertexShader.hlsl">
       <Filter>Shader Files</Filter>
     </FxCompile>
-    <FxCompile Include="..\shared\NormalPixelShader.hlsl">
+    <FxCompile Include="..\shared\shaders\NormalPixelShader.hlsl">
       <Filter>Shader Files</Filter>
     </FxCompile>
-    <FxCompile Include="..\shared\NormalVertexShader.hlsl">
+    <FxCompile Include="..\shared\shaders\NormalVertexShader.hlsl">
       <Filter>Shader Files</Filter>
     </FxCompile>
   </ItemGroup>

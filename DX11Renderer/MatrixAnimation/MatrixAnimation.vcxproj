@@ -132,49 +132,74 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\shared\D3DUtils.cpp" />
-    <ClCompile Include="..\shared\WinApp.cpp" />
-    <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="GenGeo.cpp" />
-    <ClCompile Include="Main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\shared\CheckHr.h" />
-    <ClInclude Include="..\shared\ConstantBuffers.h" />
-    <ClInclude Include="..\shared\D3DUtils.h" />
-    <ClInclude Include="..\shared\Mesh.h" />
-    <ClInclude Include="..\shared\Renderer.h" />
-    <ClInclude Include="..\shared\Vertex.h" />
-    <ClInclude Include="..\shared\WinApp.h" />
-    <ClInclude Include="GenGeo.h" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="..\..\.gitignore" />
     <None Include="..\.github\ISSUE_TEMPLATE\bug_report.md" />
     <None Include="..\.github\ISSUE_TEMPLATE\feature_request.md" />
-    <None Include="..\shared\InputLayout.hlsli" />
-    <None Include="..\shared\PhongConstants.hlsli" />
-    <None Include=".clang-format" />
+    <None Include="..\shared\config\.clang-format" />
+    <None Include="..\shared\shaders\InputLayout.hlsli" />
+    <None Include="..\shared\shaders\PhongConstants.hlsli" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="free_texture1.jpg" />
-    <Image Include="free_texture2.jpg" />
+    <ClCompile Include="..\shared\src\D3DUtils.cpp" />
+    <ClCompile Include="..\shared\src\WinApp.cpp" />
+    <ClCompile Include="src\GenGeo.cpp" />
+    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="..\shared\MeshPixelShader.hlsl">
+    <ClInclude Include="..\shared\src\include\CheckHr.h" />
+    <ClInclude Include="..\shared\src\include\ConstantBuffers.h" />
+    <ClInclude Include="..\shared\src\include\D3DUtils.h" />
+    <ClInclude Include="..\shared\src\include\Mesh.h" />
+    <ClInclude Include="..\shared\src\include\Renderer.h" />
+    <ClInclude Include="..\shared\src\include\Vertex.h" />
+    <ClInclude Include="..\shared\src\include\WinApp.h" />
+    <ClInclude Include="src\include\GenGeo.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\textures\free_texture1.jpg" />
+    <Image Include="assets\textures\free_texture2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\shared\shaders\MeshPixelShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="..\shared\MeshVertexShader.hlsl">
+    <FxCompile Include="..\shared\shaders\MeshVertexShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="..\shared\NormalPixelShader.hlsl">
+    <FxCompile Include="..\shared\shaders\NormalPixelShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="..\shared\NormalVertexShader.hlsl">
+    <FxCompile Include="..\shared\shaders\NormalVertexShader.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
