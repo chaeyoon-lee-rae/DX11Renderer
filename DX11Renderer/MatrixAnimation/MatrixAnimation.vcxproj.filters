@@ -20,6 +20,9 @@
     <None Include="..\..\.github\PULL_REQUEST_TEMPLATE\pull_request_template.md">
       <Filter>Git Files</Filter>
     </None>
+    <None Include="..\..\README.md">
+      <Filter>Documents</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
@@ -36,6 +39,9 @@
     </Filter>
     <Filter Include="Git Files">
       <UniqueIdentifier>{e57b8d57-029c-45ef-8580-d45084390264}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Documents">
+      <UniqueIdentifier>{48f750ed-79b4-443d-b0d4-0ee6e8e6e3db}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

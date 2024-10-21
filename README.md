@@ -1,11 +1,98 @@
-# DX11Renderer
-이 코드는 [홍정모의 컴퓨터 그래픽스 새싹코스 Part2](https://honglab.co.kr/courses/graphicspt2)를 수강하고 배운 내용을 바탕으로 작성되었습니다.
-<img width="1196" alt="스크린샷 2024-09-02 125203" src="https://github.com/user-attachments/assets/57f03f5d-ea65-46b0-ad7f-22d236ad41a8">
-## 개요
-- Windows 응용 프로그램을 위한 Direct3D 11 기반의 렌더링 엔진
-- ImGui를 통해 사용자 정의에 맞는 커스터마이징 가능
-- DXGI를 활용하여 스왑체인 구현 및 관리
-- MSAA(Multi-Sample Anti-Aliasing)를 사용하여 렌더링 품질 향상
-- Blinn-Phong 셰이더 기법을 사용하여 리얼타임 렌더링 완성
-## 포트폴리오 링크
-[구글 슬라이드](https://docs.google.com/presentation/d/1Gy9jdPKyIQUjzyj-krkYLxnRK2Ln0lrGBvYxNoshnng/edit#slide=id.g2f80da58c24_1_100)
+# DX11 Renderer
+
+This project is a DirectX 3D 11 renderer built with modularity and expandability in mind. 
+The structure is designed to allow easy addition of new visual studio projects and sharing of common resources. 
+The renderer demonstrates the use of **DirectX 11** for Graphics API, **DXGI** for a swapchain, **ImGui** for graphical user interfaces, and **HLSL** for shader programming.
+
+
+## Project Structure
+
+```
+DX11Renderer/
+│
+├── MatrixAnimation/
+│   ├── assets/
+│   │   └── textures/
+│   ├── src/
+│   │   ├── include/
+│   │   │   └── GenGeo.h
+│   │   ├── GenGeo.cpp
+│   │   ├── Main.cpp
+│   │   └── Renderer.cpp
+│   ├── MatrixAnimation.filters
+│   ├── MatrixAnimation.user
+│   ├── MatrixAnimation.vcxproj
+│   ├── MatrixAnimation.vcxproj.filters
+│   └── imgui.ini
+│
+├── shared/
+│   ├── config/
+│   │   └── .clang-format
+│   ├── shaders/
+│   │   ├── InputLayout.hlsli
+│   │   ├── MeshPixelShader.hlsl
+│   │   ├── MeshVertexShader.hlsl
+│   │   ├── NormalPixelShader.hlsl
+│   │   ├── NormalVertexShader.hlsl
+│   │   └── PhongConstants.hlsli
+│   └── src/
+│       ├── include/
+│       │   ├── CheckHr.h
+│       │   ├── ConstantBuffers.h
+│       │   ├── D3DUtils.h
+│       │   ├── Mesh.h
+│       │   ├── Renderer.h
+│       │   ├── Vertex.h
+│       │   └── WinApp.h
+│       ├── D3DUtils.cpp
+│       └── WinApp.cpp
+│
+└── DX11Renderer.sln
+```
+## MatrixAnimation Project
+The MatrixAnimation project contains the main renderer implementation, which includes:
+
+* Renderer.cpp: Handles initialization of Direct3D 11 and ImGui, creating and rendering meshes.
+* Main.cpp: Sets up the main window and starts the rendering loop.
+* GenGeo.cpp: Generates geometry for rendering.
+
+## Shared Resources
+The shared directory contains reusable resources:
+
+* Shaders: A collection of HLSL shaders used for rendering.
+* Utilities: D3D utility functions to assist with device creation, buffer management, etc.
+
+## Features
+* Blinn-Phong Lighting: Implements directional, point, and spotlights using the Blinn-Phong shading model in MeshPixelShader.hlsl.
+* Mesh Generation: The GenGeo utility allows for creating procedural 3D geometry.
+* Texture Support: Loads and applies textures to models.
+* Normal Rendering: Visualizes vertex normals for debugging and educational purposes.
+* ImGui Integration: Provides a GUI for scene control and real-time parameter tweaking.
+
+## Build Instructions
+### Requirements
+* Visual Studio 2019 or later
+* Windows SDK
+* DirectX 11
+* Dear ImGui
+
+### Steps to Build
+1. Clone the repository.
+2. Open the DX11Renderer.sln solution file in Visual Studio.
+3. Set MatrixAnimation as the startup project.
+4. Build and run the project.
+
+## Usage
+* The application launches a window with a D3D11 renderer.
+* Use the ImGui control panel to modify rendering parameters such as transformations, material properties, lighting options, etc.
+* The project supports wireframe rendering, normal visualization, and texture mapping.
+
+### Key Controls
+* Use Texture: Toggle between applying texture or using only material colors.
+* Wireframe Mode: Enable wireframe rendering for debugging.
+* Normal Scale: Adjust the length of normal vectors when visualizing normals.
+* Material Properties: Modify the diffuse, specular, and shininess of the material using sliders.
+* Light Settings: Adjust the position, falloff, and intensity of the directional, point, and spotlights.
+
+## Future Expansions
+This project is designed to be easily expandable. You can add new rendering techniques or projects by creating new .vcxproj files and sharing the shared/ resources.
