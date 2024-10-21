@@ -7,7 +7,6 @@
 #include "WinApp.h"
 #include "Mesh.h"
 #include "ConstantBuffers.h"
-#include "GenGeo.h"
 
 
 class Renderer : public WinApp {
