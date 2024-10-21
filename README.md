@@ -50,10 +50,11 @@ DX11Renderer/
 └── DX11Renderer.sln
 ```
 ## MatrixAnimation Project
-The MatrixAnimation project contains the main renderer implementation, which includes:
+<img alt="image" src="https://github.com/user-attachments/assets/73148c98-158a-4a2d-a595-273516b152fa">
 
-* Renderer.cpp: Handles initialization of Direct3D 11 and ImGui, creating and rendering meshes.
+The MatrixAnimation project contains the main renderer implementation, which includes:
 * Main.cpp: Sets up the main window and starts the rendering loop.
+* Renderer.cpp: Handles initialization of Direct3D 11 and ImGui, creating and rendering meshes.
 * GenGeo.cpp: Generates geometry for rendering.
 
 ## Shared Resources
@@ -69,6 +70,21 @@ The shared directory contains reusable resources:
 * Normal Rendering: Visualizes vertex normals for debugging and educational purposes.
 * ImGui Integration: Provides a GUI for scene control and real-time parameter tweaking.
 
+## Usage
+[Demonstration](https://drive.google.com/file/d/1xgxHAesuQAQ7b6cVwlYy3Bjw5E_C550p/view?usp=drive_link)
+* The application launches a window with a D3D11 renderer.
+* Use the ImGui control panel to modify rendering parameters such as transformations, material properties, lighting options, etc.
+* The project supports wireframe rendering, normal visualization, and texture mapping.
+
+### Key Controls
+<img width="341" alt="image" src="https://github.com/user-attachments/assets/4035d121-3758-46d4-aa79-3fe46ecd620f">
+
+* Use Texture: Toggle between applying texture or using only material colors.
+* Wireframe Mode: Enable wireframe rendering for debugging.
+* Normal Scale: Adjust the length of normal vectors when visualizing normals.
+* Material Properties: Modify the diffuse, specular, and shininess of the material using sliders.
+* Light Settings: Adjust the position, falloff, and intensity of the directional, point, and spotlights.
+
 ## Build Instructions
 ### Requirements
 * Visual Studio 2019 or later
@@ -81,18 +97,3 @@ The shared directory contains reusable resources:
 2. Open the DX11Renderer.sln solution file in Visual Studio.
 3. Set MatrixAnimation as the startup project.
 4. Build and run the project.
-
-## Usage
-* The application launches a window with a D3D11 renderer.
-* Use the ImGui control panel to modify rendering parameters such as transformations, material properties, lighting options, etc.
-* The project supports wireframe rendering, normal visualization, and texture mapping.
-
-### Key Controls
-* Use Texture: Toggle between applying texture or using only material colors.
-* Wireframe Mode: Enable wireframe rendering for debugging.
-* Normal Scale: Adjust the length of normal vectors when visualizing normals.
-* Material Properties: Modify the diffuse, specular, and shininess of the material using sliders.
-* Light Settings: Adjust the position, falloff, and intensity of the directional, point, and spotlights.
-
-## Future Expansions
-This project is designed to be easily expandable. You can add new rendering techniques or projects by creating new .vcxproj files and sharing the shared/ resources.
